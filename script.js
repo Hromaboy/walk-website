@@ -11,13 +11,16 @@ async function sendAnswer(answer) {
       body: JSON.stringify({ answer })
     });
 
+    const data = await response.json();
+    
     if (response.ok) {
       alert('Ответ отправлен! 🎉');
     } else {
-      alert('Ошибка отправки 😞');
+      console.error('Ошибка сервера:', data);
+      alert(`Ошибка отправки: ${data.error || 'Неизвестная ошибка'} 😞`);
     }
   } catch (error) {
-    console.error('Ошибка:', error);
-    alert('Ошибка отправки 😞');
+    console.error('Ошибка сети:', error);
+    alert(`Ошибка отправки: ${error.message} 😞`);
   }
 }
